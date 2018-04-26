@@ -1,6 +1,7 @@
 package cruds;
 import java.util.ArrayList;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -26,20 +27,34 @@ public class Crud implements CrudOperations{
 	}
 
 	@Override
-	public ArrayList<DBObject> read(BasicDBObject query) {
+	public BasicDBList read(BasicDBObject query) {
 		
-		
-		ArrayList<DBObject> arr = new ArrayList<DBObject>();
-	
+		//ArrayList<DBObject> arr = new ArrayList<DBObject>();
+                
+        BasicDBList list = new BasicDBList();
 		DBCursor cursor = this.clientes.find(query);
 
 		while (cursor.hasNext()) {
 			
-			arr.add(cursor.next());
+			list.add(cursor.next());
 		}
 		
-		return arr;		
+		return list;		
 	}
+	
+	@Override
+    public BasicDBList read() {
+
+	DBCursor cursor = this.clientes.find();
+    BasicDBList list = new BasicDBList();
+
+	while (cursor.hasNext()) {
+		
+		list.add(cursor.next());
+	}
+	
+	return list;		
+}
 	
 	@Override
 	public void update(BasicDBObject query, String key, Object val) {
