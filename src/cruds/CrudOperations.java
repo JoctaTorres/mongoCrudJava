@@ -11,7 +11,7 @@ public interface CrudOperations {
 		
 	public abstract BasicDBList read(BasicDBObject query);
     
-    public BasicDBList read();
+    	public BasicDBList read();
 	
 	public abstract void update( BasicDBObject query, String key, Object val);
 	
